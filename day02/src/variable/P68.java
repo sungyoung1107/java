@@ -14,7 +14,6 @@ public class P68 {
 
 		int n1 = 10;
 		String n2 = String.valueOf(n1); // 자바 api (int -> String)
-//		String n2 = n1 + ""; 
 
 		Random rd = new Random();
 		
