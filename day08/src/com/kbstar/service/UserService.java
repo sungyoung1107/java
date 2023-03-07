@@ -1,4 +1,4 @@
-package com.kbstar.userservice;
+package com.kbstar.service;
 
 import com.kbstar.DAO.UserDAO;
 import com.kbstar.DTO.UserDTO;
