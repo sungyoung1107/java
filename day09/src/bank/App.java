@@ -47,13 +47,17 @@ public class App {
 							System.out.println("== 계좌에 최초로 넣으실 금액을 입력해주세요. 0원 이상 넣으셔야 합니다 ==");
 							balance = sc.nextDouble();
 							break;
-						} catch (InputMismatchException e) {
+						} catch (InputMismatchException e1) {
 							System.out.println("[다시 거래해주세요] 숫자로 입력하시기 바랍니다. ");
 							sc.next(); // 커서 처리 
-						}
+						} 
 					}
-						
-					acc = new Account(name, accHolder, balance);
+					
+					try {
+						acc = new Account(name, accHolder, balance);
+					} catch (UserException e2) {
+						System.out.println(e2.getMessage());
+					}
 					
 				}else if(Integer.parseInt(menu)==2) { // 계좌 정보 조회
 					
@@ -76,9 +80,11 @@ public class App {
 								money = sc.nextDouble();
 								acc.deposit(money);
 								break;
-							} catch (InputMismatchException e) {
+							} catch (InputMismatchException e1) {
 								System.out.println("[다시 거래해주세요] 숫자로 입력하시기 바랍니다. ");
 								sc.next(); // 커서 처리 
+							} catch (UserException e2) {
+								System.out.println(e2.getMessage());
 							}
 						}
 					}
@@ -95,9 +101,11 @@ public class App {
 								money = sc.nextDouble();
 								acc.withdraw(money);
 								break;
-							} catch (InputMismatchException e) {
+							} catch (InputMismatchException e1) {
 								System.out.println("[다시 거래해주세요] 숫자로 입력하시기 바랍니다. ");
 								sc.next(); // 커서 처리 
+							} catch (UserException e2) {
+								System.out.println(e2.getMessage());
 							}
 						}
 					}
@@ -107,10 +115,7 @@ public class App {
 				}
 			} catch(NumberFormatException e) {
 				System.out.println("[다시 거래해주세요] 고객님 메뉴 번호를 다시 확인하시고 거래하시기 바랍니다. ");
-			} catch (UserException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} 
 		}
 	
 	sc.close();
