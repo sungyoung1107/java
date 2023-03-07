@@ -55,7 +55,7 @@ public class Account {
 	public void withdraw(double money) throws UserException{
 		
 		if(money > balance) {
-			throw new UserException("출금한도를 초과했습니다. 확인 후 다시 거래 하시기 바랍니다.");
+			throw new UserException("잔액이 부족합니다. 확인 후 다시 거래 하시기 바랍니다.");
 		}else if (money < 0) {
 			throw new UserException("출금금액을 확인하시기 바랍니다. 확인 후 다시 거래 하시기 바랍니다.");
 		}
