@@ -9,8 +9,8 @@ public class Lotto {
 
 	private HashSet<Integer> winningNum; // 당첨번호
 	private double prizeMoney; // 상금
-	double userPrizeMoney; // 고객상금
-	private int grade; // 순위
+	private double userPrizeMoney; // 고객상금
+	private int grade = 0; // 순위
 
 	Random rd = new Random();
 	Scanner sc = new Scanner(System.in);
@@ -30,15 +30,13 @@ public class Lotto {
 	}
 
 	public int checkRanking(ArrayList<Integer> myNum) {
-		
 		int cnt = 0; // 일치 갯수 확인
-
+		
 		for (Integer data : myNum) {
 			if (winningNum.contains(data)) {
 				cnt++;
 			}
 		}
-
 		// 1등 : 3개 일치
 		if (cnt == 3) {
 			grade = 1;
@@ -53,7 +51,8 @@ public class Lotto {
 			grade = 4;
 		}
 		return grade;
-	}
+	}	
+
 
 	// 로또번호 사용자에게 입력 받는 함수
 	public ArrayList<Integer> getNumUser() {
@@ -80,7 +79,6 @@ public class Lotto {
 				System.out.println("== 숫자로 입력해주세요 ==");
 			}
 		}
-
 		return userNum;
 	}
 
@@ -110,7 +108,6 @@ public class Lotto {
 
 	// 상금 가져오기
 	public double prizeMoney(int grade) {
-	
 		// 1등
 		if (grade == 1) {
 			userPrizeMoney = prizeMoney*0.6; // 60%
@@ -121,12 +118,11 @@ public class Lotto {
 		} else if (grade == 3) {
 			userPrizeMoney = prizeMoney*0.1; // 10%
 		// 4등
-		} else {
+		} else{
 			userPrizeMoney = 0.0 ; // 0
 		}
 		
 		return userPrizeMoney;
-
 	}
 	
 	//전체 상금 가져오기
