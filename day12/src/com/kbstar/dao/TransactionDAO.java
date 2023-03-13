@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.kbstar.dto.AccountDTO;
 import com.kbstar.dto.TransactionDTO;
 import com.kbstar.frame.DAO;
 
@@ -77,15 +78,15 @@ public class TransactionDAO implements DAO<String, TransactionDTO>{
 	@Override
 	public List<TransactionDTO> search(Object obj) throws Exception {
 		List<TransactionDTO> list = new ArrayList<>();
-//		Set<String> setofkey = db.keySet();
-//		
-//		for (String data : setofkey) {
-//			if(data == obj) {
-//				list.add(db.get(obj)); // list에 id 값이 같은 db 정보를 add
-//			}
-//		}
-//		return list;
-		return null;
+		Collection<TransactionDTO> col = db.values();
+				
+		for(TransactionDTO trans : col) {
+			if (trans.getAccNo().equals(obj)) {
+				list.add(trans);
+			}
+		}
+
+		return list;
 		
 	}
 

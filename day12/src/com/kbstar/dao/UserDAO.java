@@ -62,8 +62,16 @@ public class UserDAO implements DAO<String, UserDTO>{
 
 	@Override
 	public List<UserDTO> search(Object obj) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<UserDTO> list = new ArrayList<>();
+		Collection<UserDTO> col = db.values();
+		
+		for(UserDTO user : col) {
+			if (user.getId().equals(obj)) {
+				list.add(user);
+			}
+		}
+		
+		return list;
 	}
 	
 

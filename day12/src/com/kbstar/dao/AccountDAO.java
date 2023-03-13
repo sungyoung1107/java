@@ -91,12 +91,26 @@ public class AccountDAO implements DAO<String, AccountDTO>{
 	@Override
 	public List<AccountDTO> search(Object obj) throws Exception {
 		List<AccountDTO> list = new ArrayList<>();
-		Set<String> setofkey = db.keySet();
-		for (String data : setofkey) {
-			if(data == obj) {
-				list.add(db.get(obj)); // list에 id 값이 같은 db 정보를 add
+		Collection<AccountDTO> col = db.values();
+		
+		for(AccountDTO acc : col) {
+			if (acc.getHolder().equals(obj)) {
+				list.add(acc);
 			}
 		}
+
+//		for(int i = 0; i < col.size() ; i++) {
+//			list.add(col[i]); // 해당 for문으로 접근??
+//		}
+		
+//		 이것도 가능
+//		Set<String> setofkey = db.keySet(); // id를 끄집어 낸다.
+//		for (String data : setofkey) {
+//			if(data == obj) {
+//				list.add(db.get(obj)); // list에 id 값이 같은 db 정보를 add
+//			}
+//		}
+		
 		return list;
 	}
 

@@ -18,10 +18,6 @@ import com.kbstar.frame.MakeAccountNumber;
 import com.kbstar.frame.Notification;
 import com.kbstar.noti.NotificationImpl;
 
-/**
- * @author 성영
- *
- */
 public class BankServiceImpl
 implements BankService<UserDTO, AccountDTO,
 TransactionDTO, String, String>{
@@ -30,7 +26,7 @@ TransactionDTO, String, String>{
 	DAO<String, AccountDTO> accountDao;
 	DAO<String, TransactionDTO> transactionDao;
 	Notification notification;
-	UserDTO user ;
+	UserDTO user ; // 유저정보는 로그인시 저장하여 쓸 수 있도록 한다.
 	
 	public BankServiceImpl() {
 		userDao = new UserDAO();
@@ -94,15 +90,13 @@ TransactionDTO, String, String>{
 	@Override
 	public List<AccountDTO> getAllAccount(String k) throws Exception {
 		List<AccountDTO> list = new ArrayList<>();
-		list.add(accountDao.select(k));	// accountDao.select(k) 반환 객체 AccountDTO
+		list = accountDao.search(k);
 		return list;
 	}
 
 	@Override
 	public List<TransactionDTO> getAllTr(String acc) throws Exception {
-		List<TransactionDTO> list = new ArrayList<>();
-		list.add(transactionDao.select(acc));
-		return list;
+		return transactionDao.search(acc); // 위에랑 아래랑 줄인거.
 	}
 
 	@Override

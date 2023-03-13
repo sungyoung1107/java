@@ -1,5 +1,6 @@
 package com.kbstar.app;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.kbstar.dto.AccountDTO;
@@ -71,9 +72,11 @@ public class App {
 							 System.out.println("계좌이체 완료");
 						 }else if (menu.equals("a")) {
 							 System.out.println("Select Account");
-							 System.out.println("나의 계좌번호를 입력해주세요");
-							 String acc = sc.next();
-							 service.getUserInfo(acc);
+							 List<AccountDTO> list = null;
+							 list = service.getAllAccount(user.getId()); 
+							 for(AccountDTO acc : list) {
+								 System.out.println(acc);
+							 }
 						 }else if (menu.equals("i")) {
 							 System.out.println("User Info");
 							 String rid = user.getId();
@@ -82,8 +85,12 @@ public class App {
 							 System.out.println(ruser);
 						 }else if (menu.equals("tr")) {
 							 System.out.println("Select Transaction");
-							 String rid = user.getId();
-							
+							 String accNo = sc.next();
+							 List<TransactionDTO> list = null;
+							 list = service.getAllTr(accNo);
+							 for (TransactionDTO trans : list) {
+								 System.out.println(trans);
+							 }
 						 }
 						 
 					 }
