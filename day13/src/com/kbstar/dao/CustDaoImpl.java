@@ -1,14 +1,11 @@
 package com.kbstar.dao;
 
-import java.io.FileInputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import com.kbstar.dto.Cust;
 import com.kbstar.frame.Sql;
@@ -24,30 +21,6 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 //			e.printStackTrace();
 		}
 		System.out.println("Driver Loading 성공하였습니다...");
-	}
-
-	// 2. Connect : 포트번호 등으로 연결하기. 함수를 한개 만든다. 반환은 Connection 객체를 생성해서 준다.
-	// Connection 객체가 필요한 이유는 나중에 PreparedStatement 객체를 생성하기 위함이다.
-	// PreparedStatement는 statement를 상속받는 인터페이스로 자체적으로 객체를 생성하지 못하고
-	// Connection 객체의 prepareStatement(String query)를 통해 생성할 수 있음
-	public Connection getConnection() throws Exception {
-		Connection con = null;
-		/* 운영시스템에 자바 소스가 없으니 이걸 이용해서 한다. */
-		/* ip 주소는 파일 안에서만 바꾸면 됨 */
-		Properties props = new Properties();
-		String fileName = "db_info.txt";
-		FileInputStream in = new FileInputStream(fileName);
-		props.load(in);
-
-		String id = props.getProperty("DB_ID");
-		String pwd = props.getProperty("DB_PWD");
-		String url = props.getProperty("DB_URL");
-
-		con = DriverManager.getConnection(url, id, pwd);
-		// IP가 잘못되었을 때 getConnection()에서.... 바로 위에 문장이 에러가 남
-		// at com.kbstar.dao.CustDaoImpl.getConnection
-
-		return con;
 	}
 
 	@Override
@@ -67,29 +40,22 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 
 	@Override
 	public void delete(String k) throws Exception {
-		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(Sql.deleteSql);) { // 우리가
-																										// 친다.
+		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(Sql.deleteSql);) { 
 			pstmt.setString(1, k);
 
 			int result = pstmt.executeUpdate();
 			if (result == 0) {
 				throw new Exception("ID 없음"); // 여기서 던지는게 아니라 실제로 밑에서 던지는 거다.
 			}
-
 			System.out.println(result);
-
 		} catch (SQLException e1) {
 			throw e1; // app 쪽으로 던지기 위해 // 시스템 장애
 		}
 	}
 
-	@Override
+	@Override // 우리가 보낸 내용을 업데이트 친다.
 	public void update(Cust v) throws Exception {
-		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(Sql.updateSql);) { // 우리가
-																													// 보낸
-																													// 내용을
-																													// 업데이트
-																													// 친다.
+		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(Sql.updateSql);) { 
 			pstmt.setString(1, v.getPwd());
 			pstmt.setString(2, v.getName());
 			pstmt.setInt(3, v.getAge());
@@ -158,33 +124,12 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 			}
 			catch(Exception e) {
 				e.printStackTrace();
+				throw e;
 			}
 		}catch(Exception e) {
 			throw e ; //SQLRecoverableException / IO 오류 // 이거는 서비스 영역에서 처리
 		}
-		
 		return list;
-		
-//		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(Sql.selectAllsSql);) { 
-//			try (ResultSet rset = pstmt.executeQuery()) {
-//
-//				while (rset.next()) {
-//					String db_id = rset.getString("id"); /* .getString(1); */ /* 인덱스는 1부터 시작 */
-//					String db_pwd = rset.getString("pwd"); /* getString(2); */
-//					String name = rset.getString("name"); /* getString(3); */
-//					int age = rset.getInt("age"); /* getInt(3); */
-//					Cust cust = new Cust(db_id, db_pwd, name, age);
-//					list.add(cust);
-//				}
-//			} catch (SQLException e) {
-//				throw new Exception("select 오류입니다");
-//			}
-//
-//		} catch (Exception e1) {
-//			throw e1; // app 쪽으로 던지기 위해
-//		}
-//
-//		return list;
 	}
 
 	@Override
