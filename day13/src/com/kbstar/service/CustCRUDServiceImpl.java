@@ -15,7 +15,7 @@ public class CustCRUDServiceImpl implements CRUDService<String, Cust> {
 	DAO<String, String, Cust> dao;
 
 	public CustCRUDServiceImpl() {
-		dao = new CustDaoImpl();
+		dao = new CustDaoImpl(); // db와 연결되어 있음.
 	}
 
 	@Override
@@ -67,14 +67,14 @@ public class CustCRUDServiceImpl implements CRUDService<String, Cust> {
 	@Override
 	public Cust get(String k) throws Exception {
 		Cust cust = null;
-
 		try {
 			cust = dao.select(k);
 		} catch (Exception e) {
 			if (e instanceof SQLRecoverableException) {
-				throw new Exception("시스템 장애입니다");
-			} else {
-				throw new Exception("해당 ID가 존재하지 않아 검색을 할 수 없습니다");
+				throw new Exception("시스템 장애입니다.");
+			}
+			else {
+				throw new Exception("해당 ID가 존재하지 않습니다");
 			}
 		}
 		return cust;
@@ -83,15 +83,16 @@ public class CustCRUDServiceImpl implements CRUDService<String, Cust> {
 	@Override
 	public List<Cust> get() throws Exception {
 		List<Cust> list = null;
-
+		
 		try {
 			list = dao.selectAll();
 		} catch (Exception e) {
 			if (e instanceof SQLRecoverableException) {
 				throw new Exception("시스템 장애입니다");
-			} else {
-				throw new Exception("해당 ID가 존재하지 않아 검색을 할 수 없습니다");
 			}
+//			} else {
+//				throw new Exception("해당 ID가 존재하지 않아 검색을 할 수 없습니다");
+//			}
 		}
 		return list;
 	}

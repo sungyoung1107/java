@@ -6,10 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SelectTest {
+public class SelectTest2 {
 	
 	public static void main(String[] args) {
 		// 1. JDBC 드라이버 로드 : MySQL에 연결할겁니까, ORACLE에 연결할겁니까
+/// 직접 해보기		
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 		} catch (ClassNotFoundException e) {
@@ -31,7 +32,7 @@ public class SelectTest {
 		try { // 우리가 보낸 내용을 업데이트 친다.
 			conn = DriverManager.getConnection(url, id, pwd);
 			pstmt = conn.prepareStatement(selectSql);
-			pstmt.setString(1, "id30");
+			pstmt.setString(1, "id01");
 			
 			try(ResultSet rset = pstmt.executeQuery()) {
 				rset.next();

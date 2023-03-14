@@ -1,3 +1,5 @@
 DB_ID=bank
 DB_PWD=111111
 DB_URL=jdbc:oracle:thin:@ 172.16.20.53:1521:XE
+
+/* 8080 전까지...만 ip 주소 볻붙 */
