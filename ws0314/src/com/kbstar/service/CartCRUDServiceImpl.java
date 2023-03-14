@@ -30,10 +30,6 @@ public class CartCRUDServiceImpl implements CRUDService<String, Cart> {
 			String item_id = MakeItemNumber.makeItemNum();
 			v.setItem_id(item_id);
 			dao.insert(v);
-			
-			// UserId 불러와야 함!!!!!!
-			v.setUser_id("300"); // 일단 세팅
-
 		} catch (Exception e) {
 			if (e instanceof SQLIntegrityConstraintViolationException) {
 				throw new Exception("카드 번호 오류입니다.");

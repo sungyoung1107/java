@@ -18,7 +18,6 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 			Class.forName("oracle.jdbc.OracleDriver"); // 클래스를 불러온다. 클래스 이름은 ORACLE DRIVER
 		} catch (ClassNotFoundException e) {
 			System.out.println("Driver Loading 실패하였습니다...");
-//			e.printStackTrace();
 		}
 		System.out.println("Driver Loading 성공하였습니다...");
 	}
@@ -42,7 +41,6 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 	public void delete(String k) throws Exception {
 		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(Sql.deleteSql);) {
 			pstmt.setString(1, k);
-
 			int result = pstmt.executeUpdate();
 			if (result == 0) {
 				throw new Exception("ID 없음"); // 여기서 던지는게 아니라 실제로 밑에서 던지는 거다.
@@ -60,7 +58,6 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 			pstmt.setString(2, v.getName());
 			pstmt.setInt(3, v.getAge());
 			pstmt.setString(4, v.getId());
-
 			int result = pstmt.executeUpdate();
 			if (result == 0) {
 				System.out.println("여기왔음");
@@ -121,7 +118,6 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 					list.add(cust);
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
 				throw e;
 			}
 		} catch (Exception e) {

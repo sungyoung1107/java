@@ -18,7 +18,6 @@ public class CartTest {
 		try {
 			service.register(cart1);
 			System.out.println("추가성공");
-			System.out.println(service);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -27,21 +26,20 @@ public class CartTest {
 		try {
 			service.register(cart2);
 			System.out.println("추가성공");
-			System.out.println(service);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
 		// 삭제
 		try {
-			service.remove("2023314711101");
+			service.remove("2023314853101");
 			System.out.println("삭제성공");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
 		// 수정
-		Cart cart3 = new Cart("2023314856101", 100, "2023314856101");
+		Cart cart3 = new Cart("2023314914100", 100, "2023314905100");
 		try {
 			service.modify(cart3);
 			System.out.println("수정성공");
@@ -53,7 +51,7 @@ public class CartTest {
 		// 부분검색
 		try {
 			System.out.println("부분검색을 시작합니다");
-			Cart cart4 = service.get("2023314144101");
+			Cart cart4 = service.get("2023314272101");
 			System.out.println(cart4.getId() + ", " + cart4.getUser_id() + ", " + cart4.getItem_id() + ", "
 					+ cart4.getCnt() + ", " + cart4.getRegdate());
 		} catch (Exception e) {

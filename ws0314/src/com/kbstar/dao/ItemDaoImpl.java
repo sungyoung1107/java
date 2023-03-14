@@ -13,12 +13,10 @@ import com.kbstar.frame.Sql;
 public class ItemDaoImpl implements DAO<String, String, Item> {
 
 	public ItemDaoImpl() {
-
 		try {
 			Class.forName("oracle.jdbc.OracleDriver"); // 클래스를 불러온다. 클래스 이름은 ORACLE DRIVER
 		} catch (ClassNotFoundException e) {
 			System.out.println("Driver Loading 실패하였습니다...");
-//			e.printStackTrace();
 		}
 		System.out.println("Driver Loading 성공하였습니다...");
 	}
@@ -32,8 +30,7 @@ public class ItemDaoImpl implements DAO<String, String, Item> {
 			pstmt.setDouble(4, v.getRate());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
-//			throw e;
+			throw e;
 		}
 	}
 
@@ -45,7 +42,6 @@ public class ItemDaoImpl implements DAO<String, String, Item> {
 			if (result == 0) {
 				throw new Exception("해당 ID 없음");
 			}
-
 		} catch (Exception e) {
 			throw e;
 		}
@@ -86,12 +82,10 @@ public class ItemDaoImpl implements DAO<String, String, Item> {
 			} catch (Exception e) { // 여기서 에러가 발생하면 바깥쪽 에러에 던져진다.
 				throw new Exception("id가 없습니다");
 			}
-
 		} catch (Exception e) {
 			// Connection 에러일 때 예외처리는 여기서 한다.
 			throw e;
 		}
-
 		return item;
 	}
 

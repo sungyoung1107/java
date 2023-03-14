@@ -13,8 +13,8 @@ import com.kbstar.frame.Sql;
 
 public class CartDaoImpl implements DAO<String, String, Cart> {
 
+	
 	public CartDaoImpl() {
-
 		try {
 			Class.forName("oracle.jdbc.OracleDriver"); // 클래스를 불러온다. 클래스 이름은 ORACLE DRIVER
 		} catch (ClassNotFoundException e) {
@@ -38,7 +38,6 @@ public class CartDaoImpl implements DAO<String, String, Cart> {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
 			throw e;
 		}
 	}
@@ -63,7 +62,6 @@ public class CartDaoImpl implements DAO<String, String, Cart> {
 			pstmt.setString(1, v.getItem_id()); // itemId set
 			pstmt.setInt(2, v.getCnt()); // 상품갯수 set
 			pstmt.setString(3, v.getId()); // 카트번호
-
 			int result = pstmt.executeUpdate();
 			if (result == 0) {
 				throw new Exception("일치하는 카트 번호가 없습니다.");
@@ -83,13 +81,11 @@ public class CartDaoImpl implements DAO<String, String, Cart> {
 
 			try (ResultSet rset = pstmt.executeQuery()) {
 				rset.next(); // 키값 한번 이동시켜야 함
-
 				String id = rset.getString("id");
 				String user_id = rset.getString("user_id");
 				String item_id = rset.getString("item_id");
 				Integer cnt = rset.getInt("cnt");
 				Date regdate = rset.getDate("regdate");
-
 				cart = new Cart(id, user_id, item_id, cnt, regdate);
 			} catch (Exception e) { // 여기서 에러가 발생하면 바깥쪽 에러에 던져진다.
 				throw new Exception("일치하는 카트 번호가 없습니다.");
@@ -111,13 +107,11 @@ public class CartDaoImpl implements DAO<String, String, Cart> {
 
 				while (rset.next()) {
 					Cart cart = null;
-
 					String id = rset.getString("id");
 					String user_id = rset.getString("user_id");
 					String item_id = rset.getString("item_id");
 					Integer cnt = rset.getInt("cnt");
 					Date regdate = rset.getDate("regdate");
-
 					cart = new Cart(id, user_id, item_id, cnt, regdate);
 					list.add(cart);
 
