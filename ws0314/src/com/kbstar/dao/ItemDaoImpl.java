@@ -18,7 +18,7 @@ public class ItemDaoImpl implements DAO<String, String, Item> {
 		} catch (ClassNotFoundException e) {
 			System.out.println("Driver Loading 실패하였습니다...");
 		}
-		System.out.println("Driver Loading 성공하였습니다...");
+//		System.out.println("Driver Loading 성공하였습니다...");
 	}
 
 	@Override

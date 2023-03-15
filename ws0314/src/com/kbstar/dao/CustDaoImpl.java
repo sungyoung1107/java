@@ -19,7 +19,7 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 		} catch (ClassNotFoundException e) {
 			System.out.println("Driver Loading 실패하였습니다...");
 		}
-		System.out.println("Driver Loading 성공하였습니다...");
+//		System.out.println("Driver Loading 성공하였습니다...");
 	}
 
 	@Override

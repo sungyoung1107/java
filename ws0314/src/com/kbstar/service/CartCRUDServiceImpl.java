@@ -24,11 +24,9 @@ public class CartCRUDServiceImpl implements CRUDService<String, Cart> {
 		// 데이터 검증
 		// DB 입력
 		try {
-			String id = MakeItemNumber.makeCartNum();
+			String id = MakeItemNumber.makeCartNum(); // 카트넘버 자동생성
 			v.setId(id);
-			
-			String item_id = MakeItemNumber.makeItemNum();
-			v.setItem_id(item_id);
+
 			dao.insert(v);
 		} catch (Exception e) {
 			if (e instanceof SQLIntegrityConstraintViolationException) {

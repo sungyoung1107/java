@@ -12,13 +12,12 @@ public class Cart {
 	private String item_id; // 상품 id(item id)
 	private int cnt; // 상품 갯수
 	private Date regdate; // 상품 등록일자
-	
+
 	DAO<String, String, Cust> cust; // cust 정보를 가지고 있는 객체를 선언한다.
 
 	public Cart() {
 		cust = new CustDaoImpl(); // cust 정보를 가지고 있는 객체를 만든다.
 	}
-	
 
 	public Cart(String user_id, int cnt) {
 		this.user_id = user_id;

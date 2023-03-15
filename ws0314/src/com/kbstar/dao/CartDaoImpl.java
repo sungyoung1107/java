@@ -13,14 +13,13 @@ import com.kbstar.frame.Sql;
 
 public class CartDaoImpl implements DAO<String, String, Cart> {
 
-	
 	public CartDaoImpl() {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver"); // 클래스를 불러온다. 클래스 이름은 ORACLE DRIVER
 		} catch (ClassNotFoundException e) {
 			System.out.println("Driver Loading 실패하였습니다...");
 		}
-		System.out.println("Driver Loading 성공하였습니다...");
+//		System.out.println("Driver Loading 성공하였습니다...");
 	}
 
 	@Override
@@ -133,8 +132,36 @@ public class CartDaoImpl implements DAO<String, String, Cart> {
 
 	@Override
 	public List<Cart> search(String k2) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<Cart> list = new ArrayList<>();
+
+		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.mycartselectAllSql)) {
+			pstmt.setString(1, k2);
+			try (ResultSet rset = pstmt.executeQuery();) {
+
+				while (rset.next()) {
+					Cart cart = null;
+					String id = rset.getString("id");
+					String user_id = rset.getString("user_id");
+					String item_id = rset.getString("item_id");
+					Integer cnt = rset.getInt("cnt");
+					Date regdate = rset.getDate("regdate");
+					cart = new Cart(id, user_id, item_id, cnt, regdate);
+					list.add(cart);
+
+					if (list.size() == 0) {
+						throw new Exception("카트가 비어있습니다.");
+					}
+				}
+
+			} catch (Exception e) {
+				throw e;
+			}
+
+		} catch (Exception e) {
+			throw e;
+		}
+
+		return list;
 	}
 
 }
