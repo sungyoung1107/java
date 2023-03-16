@@ -27,7 +27,7 @@ public class App {
 		// INTRO //
 		System.out.println("== 안녕하십니까 고객님, KB국민은행에 오신 것을 환영합니다! ==");
 
-		// MENU //
+		// MENU  //
 		while (true) {
 			System.out.println("== 거래하실 메뉴를 번호로 입력해주세요 == ");
 			System.out.println("< 1.가입하기, 2.로그인하기, 3.나가기 >");
